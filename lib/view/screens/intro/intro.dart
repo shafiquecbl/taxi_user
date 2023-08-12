@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:taxi_user/common/primary_button.dart';
 import 'package:taxi_user/helper/navigation.dart';
 import 'package:taxi_user/utils/images.dart';
-import 'package:taxi_user/utils/style.dart';
 import 'package:taxi_user/view/screens/auth/login.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -37,7 +36,7 @@ class IntroScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 // description
                 const Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget elementum aliquam, odio nibh ultricies odio, vitae lacinia velit nisl eget dolor. ',
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget elementum aliquam.',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 14,

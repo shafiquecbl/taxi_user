@@ -4,7 +4,10 @@ import 'package:taxi_user/common/primary_button.dart';
 import 'package:taxi_user/utils/style.dart';
 
 class BookRideSheet extends StatefulWidget {
-  const BookRideSheet({super.key});
+  final double? distance;
+  final double? fare;
+  final String? duration;
+  const BookRideSheet({this.distance, this.fare, this.duration, super.key});
 
   @override
   State<BookRideSheet> createState() => _BookRideSheetState();
@@ -12,6 +15,7 @@ class BookRideSheet extends StatefulWidget {
 
 class _BookRideSheetState extends State<BookRideSheet> {
   int _selecteRide = 0;
+  final TextEditingController _fareController = TextEditingController();
   List<String> rideType = [
     'Ride AC',
     'Ride',
@@ -21,6 +25,7 @@ class _BookRideSheetState extends State<BookRideSheet> {
 
   @override
   Widget build(BuildContext context) {
+    _fareController.text = widget.fare.toString();
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -115,7 +120,7 @@ class _BookRideSheetState extends State<BookRideSheet> {
                 ),
                 itemCount: rideType.length,
               )),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
 
           // offer your fair field
           Container(
@@ -128,28 +133,69 @@ class _BookRideSheetState extends State<BookRideSheet> {
               ),
             ),
             child: Row(
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Iconsax.dollar_circle,
                   size: 20,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
-                    style: TextStyle(
+                    controller: _fareController,
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.normal,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Offer Your Fair',
                       border: InputBorder.none,
                     ),
                   ),
                 ),
+                if (widget.distance != null) ...[
+                  const SizedBox(width: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Theme.of(context).dividerColor),
+                    ),
+                    child: Text(
+                      '${widget.distance}KM',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ],
+                if (widget.duration != null) ...[
+                  const SizedBox(width: 5),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Theme.of(context).dividerColor),
+                    ),
+                    child: Text(
+                      '${widget.duration} min',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ]
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          // const SizedBox(height: 5),
           //  comments field
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),

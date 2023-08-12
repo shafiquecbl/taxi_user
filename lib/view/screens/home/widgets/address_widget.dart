@@ -11,7 +11,13 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddressWidget extends StatefulWidget {
   final Function(LatLng start, LatLng end) onSelected;
-  const AddressWidget({required this.onSelected, super.key});
+  final Function()? onClear;
+  final LatLng? initialPostition;
+  const AddressWidget(
+      {required this.onSelected,
+      this.onClear,
+      this.initialPostition,
+      super.key});
 
   @override
   State<AddressWidget> createState() => _AddressWidgetState();
@@ -46,8 +52,10 @@ class _AddressWidgetState extends State<AddressWidget> {
             color: Theme.of(context).primaryColor,
             onPressed: () async {
               await launchScreen(PlacePicker(
+                useCurrentLocation: true,
                 apiKey: AppConstants.API_KEY,
-                initialPosition: const LatLng(31.5204, 74.3587),
+                initialPosition:
+                    widget.initialPostition ?? const LatLng(31.5204, 74.3587),
                 onPlacePicked: (result) {
                   pop();
                   setState(() {
@@ -65,6 +73,7 @@ class _AddressWidgetState extends State<AddressWidget> {
               setState(() {
                 _pickupAddress = '';
               });
+              widget.onClear!();
             },
           ),
           for (var i = 0; i < 5; i++)
@@ -77,8 +86,10 @@ class _AddressWidgetState extends State<AddressWidget> {
             color: Colors.red,
             onPressed: () async {
               await launchScreen(PlacePicker(
+                useCurrentLocation: true,
                 apiKey: AppConstants.API_KEY,
-                initialPosition: const LatLng(31.5204, 74.3587),
+                initialPosition:
+                    widget.initialPostition ?? const LatLng(31.5204, 74.3587),
                 onPlacePicked: (result) {
                   pop();
                   setState(() {
@@ -95,6 +106,7 @@ class _AddressWidgetState extends State<AddressWidget> {
             onClose: () {
               setState(() {
                 _dropoffAddress = '';
+                widget.onClear!();
               });
             },
           )
@@ -122,7 +134,7 @@ class _AddressWidgetState extends State<AddressWidget> {
           child: InkWell(
             onTap: onPressed,
             child: Text(title,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 14.0,

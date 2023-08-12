@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages, unused_import, prefer_final_fields
 
-import 'dart:math';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
@@ -32,12 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
   late GoogleMapController mapController;
   Set<Marker> _markers = <Marker>{};
   Set<Polyline> _polylines = {};
+  double? _distance;
+  String? _duration;
+  bool _sheetVisible = false;
+  double? _fare;
+  LatLng? _currentPosition;
 
   // scaffold key
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _getCurrentLocation() {
     MapsRepo.instance.getCurrentLocation((position) {
+      setState(() {
+        _currentPosition = LatLng(position.latitude, position.longitude);
+      });
+
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -46,38 +56,32 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       );
-
-      // setState(() {
-      //   // add marker
-      //   markers = {
-      //     Marker(
-      //       markerId: const MarkerId('current'),
-      //       position: LatLng(position.latitude, position.longitude),
-      //       icon: BitmapDescriptor.defaultMarker,
-      //     )
-      //   };
-      // });
     });
   }
 
   void _getPolyline(LatLng start, LatLng end) async {
     _polylines.clear();
     _polylines = await MapsRepo.instance.getPolyline(start, end);
-
     if (_polylines.isNotEmpty) {
-      setState(() {});
       _addMarkers(start, end);
-      mapController.animateCamera(
-        CameraUpdate.newCameraPosition(
-            MapsRepo.instance.getCameraPosition(start, end)),
-      );
     }
   }
 
   void _addMarkers(LatLng start, LatLng end) async {
     _markers.clear();
     _markers = await MapsRepo.instance.getMarkers(start, end);
-    setState(() {});
+    _distance = MapsRepo.instance.getDistance(start, end);
+    _fare = MapsRepo.instance.calculateFare(_distance!);
+    _duration = MapsRepo.instance.getDuration(start, end);
+    setState(() {
+      _sheetVisible = true;
+    });
+    Future.delayed(const Duration(milliseconds: 500), () {
+      mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+            MapsRepo.instance.getCameraPosition(start, end)),
+      );
+    });
   }
 
   @override
@@ -104,8 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 1.85,
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height:
+                _sheetVisible ? MediaQuery.of(context).size.height / 1.8 : null,
             child: GoogleMap(
               mapType: MapType.normal,
               compassEnabled: true,
@@ -128,14 +134,31 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               AddressWidget(
+                initialPostition: _currentPosition,
                 onSelected: _getPolyline,
+                onClear: () {
+                  setState(() {
+                    _polylines.clear();
+                    _markers.clear();
+                    _distance = 0.0;
+                    _duration = null;
+                    _fare = 0.0;
+                    _sheetVisible = false;
+                  });
+                },
               ),
               _currentLocationWidget(),
             ],
           )
         ],
       ),
-      bottomSheet: const BookRideSheet(),
+      bottomSheet: _sheetVisible
+          ? BookRideSheet(
+              distance: _distance,
+              fare: _fare,
+              duration: _duration,
+            )
+          : null,
     );
   }
 

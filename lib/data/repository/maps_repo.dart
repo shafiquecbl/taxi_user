@@ -142,4 +142,37 @@ class MapsRepo {
       callback(position);
     }
   }
+
+  // get distance in KM
+  double getDistance(LatLng start, LatLng end) {
+    double distanceInMeters = Geolocator.distanceBetween(
+      start.latitude,
+      start.longitude,
+      end.latitude,
+      end.longitude,
+    );
+    return double.parse((distanceInMeters / 1000).toStringAsFixed(2));
+  }
+
+  // calculate fare in PKR
+  double calculateFare(double distance) {
+    double fare = 0.0;
+    if (distance <= 1) {
+      fare = 100;
+    } else {
+      fare = 100 + (distance - 1) * 50;
+    }
+    return fare == 100 ? fare : fare + 100;
+  }
+
+  // get duration in  minutes
+  String getDuration(LatLng start, LatLng end) {
+    double distanceInMeters = Geolocator.distanceBetween(
+      start.latitude,
+      start.longitude,
+      end.latitude,
+      end.longitude,
+    );
+    return ((distanceInMeters / 1000) * 5).toStringAsFixed(0);
+  }
 }
