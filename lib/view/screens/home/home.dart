@@ -104,23 +104,26 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          GoogleMap(
-            mapType: MapType.normal,
-            compassEnabled: true,
-            zoomControlsEnabled: true,
-            mapToolbarEnabled: true,
-            myLocationEnabled: false,
-            myLocationButtonEnabled: false,
-            polylines: _polylines,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(31.5204, 74.3587),
-              zoom: 10,
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 1.85,
+            child: GoogleMap(
+              mapType: MapType.normal,
+              compassEnabled: true,
+              zoomControlsEnabled: true,
+              mapToolbarEnabled: true,
+              myLocationEnabled: false,
+              myLocationButtonEnabled: false,
+              polylines: _polylines,
+              initialCameraPosition: const CameraPosition(
+                target: LatLng(31.5204, 74.3587),
+                zoom: 10,
+              ),
+              markers: _markers,
+              onMapCreated: (controller) {
+                mapController = controller;
+                _getCurrentLocation();
+              },
             ),
-            markers: _markers,
-            onMapCreated: (controller) {
-              mapController = controller;
-              _getCurrentLocation();
-            },
           ),
           Column(
             children: [

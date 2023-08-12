@@ -26,9 +26,9 @@ class MapsRepo {
 
   Future<Set<Marker>> getMarkers(LatLng start, LatLng end) async {
     final markerSouce =
-        await convertAssetToUnit8List(Images.pin_start, width: 100);
+        await convertAssetToUnit8List(Images.pin_start, width: 150);
     final markerDestination =
-        await convertAssetToUnit8List(Images.pin_end, width: 100);
+        await convertAssetToUnit8List(Images.pin_end, width: 150);
     Set<Marker> markers = <Marker>{};
     markers.add(
       Marker(
@@ -48,8 +48,11 @@ class MapsRepo {
   Future<Uint8List> convertAssetToUnit8List(String imagePath,
       {int width = 50}) async {
     ByteData data = await rootBundle.load(imagePath);
-    Codec codec = await instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
+    Codec codec = await instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+      targetHeight: width,
+    );
     FrameInfo fi = await codec.getNextFrame();
     return (await fi.image.toByteData(format: ImageByteFormat.png))!
         .buffer
@@ -77,7 +80,7 @@ class MapsRepo {
 
       polylines.add(Polyline(
         polylineId: const PolylineId("path"),
-        color: Colors.deepPurple,
+        color: Colors.deepPurpleAccent,
         width: 5,
         points: polylineCoordinates,
       ));
@@ -98,7 +101,12 @@ class MapsRepo {
 
     double result = min(latZoom, lngZoom);
 
-    return result > zoomMax ? zoomMax : result;
+    // Calculate desired zoom level based on map height
+    double heightZoom = log(300 * 360 / (256 * latDiff)) / ln2;
+
+    return (min(result, heightZoom) > zoomMax
+        ? zoomMax
+        : min(result, heightZoom));
   }
 
   CameraPosition getCameraPosition(LatLng start, LatLng end) {
