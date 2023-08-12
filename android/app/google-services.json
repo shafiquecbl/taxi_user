@@ -1,40 +1,49 @@
 {
   "project_info": {
-    "project_number": "905849856876",
-    "project_id": "fooddelivery005",
-    "storage_bucket": "fooddelivery005.appspot.com"
+    "project_number": "987150143210",
+    "firebase_url": "https://medicar-7cc3e-default-rtdb.firebaseio.com",
+    "project_id": "medicar-7cc3e",
+    "storage_bucket": "medicar-7cc3e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905849856876:android:887f36b0091f82c97fc949",
+        "mobilesdk_app_id": "1:987150143210:android:8ba7c9a6ad78faa504d193",
         "android_client_info": {
-          "package_name": "com.example.driver_app"
+          "package_name": "com.dcodax.taxi.customer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
+          "client_id": "987150143210-vst7v3pqcdfdrqrs1l3d263fmt1ta7gk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dcodax.taxi.customer",
+            "certificate_hash": "2706bc70632be6c9aa25d60934f5064f07243558"
+          }
+        },
+        {
+          "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3c2O71fkSqcIP_olcBLorm_zV2SwmFu8"
+          "current_key": "AIzaSyCPOl3PquC7NMWtGAL8x7xdmFeAkTuP6O4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
+              "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "905849856876-3gllmv0qighg2cbqi5jj8un8nadvfbit.apps.googleusercontent.com",
+              "client_id": "987150143210-8kot6r9cf4sqh0115kkkfgebk0diqn9s.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.restaurant"
+                "bundle_id": "com.medicar.rider.app"
               }
             }
           ]
@@ -43,106 +52,78 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905849856876:android:6adc390cd153dc797fc949",
-        "android_client_info": {
-          "package_name": "com.example.food_delivery"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA3c2O71fkSqcIP_olcBLorm_zV2SwmFu8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "905849856876-3gllmv0qighg2cbqi5jj8un8nadvfbit.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.restaurant"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:905849856876:android:f7a8b8b8466ea5907fc949",
-        "android_client_info": {
-          "package_name": "com.example.restaurant_owner"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA3c2O71fkSqcIP_olcBLorm_zV2SwmFu8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "905849856876-3gllmv0qighg2cbqi5jj8un8nadvfbit.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.restaurant"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:905849856876:android:cc9848d6a54cacc17fc949",
+        "mobilesdk_app_id": "1:987150143210:android:dfe563b8b8fb852304d193",
         "android_client_info": {
           "package_name": "com.example.taxi_user"
         }
       },
       "oauth_client": [
         {
-          "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
+          "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3c2O71fkSqcIP_olcBLorm_zV2SwmFu8"
+          "current_key": "AIzaSyCPOl3PquC7NMWtGAL8x7xdmFeAkTuP6O4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "905849856876-o8v9nkpap3pgdgbou7ooo8l1colcvu7v.apps.googleusercontent.com",
+              "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "905849856876-3gllmv0qighg2cbqi5jj8un8nadvfbit.apps.googleusercontent.com",
+              "client_id": "987150143210-8kot6r9cf4sqh0115kkkfgebk0diqn9s.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.restaurant"
+                "bundle_id": "com.medicar.rider.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987150143210:android:da31b1895498183304d193",
+        "android_client_info": {
+          "package_name": "com.medicar.rider.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987150143210-bi6dqd0o33a14g7ftpsistiri6np9m5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medicar.rider.app",
+            "certificate_hash": "2706bc70632be6c9aa25d60934f5064f07243558"
+          }
+        },
+        {
+          "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPOl3PquC7NMWtGAL8x7xdmFeAkTuP6O4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987150143210-lb8d6ajajc4bvmru3105rq3j86n2qjnr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "987150143210-8kot6r9cf4sqh0115kkkfgebk0diqn9s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.medicar.rider.app"
               }
             }
           ]

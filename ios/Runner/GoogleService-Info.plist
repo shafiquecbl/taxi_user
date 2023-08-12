@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>905849856876-9lktrskki1phiv5jj9r4ktgk6rale7oa.apps.googleusercontent.com</string>
+	<string>987150143210-bhq9ar7nii5g0jgmfep5515kroa7s8ge.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.905849856876-9lktrskki1phiv5jj9r4ktgk6rale7oa</string>
+	<string>com.googleusercontent.apps.987150143210-bhq9ar7nii5g0jgmfep5515kroa7s8ge</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>987150143210-bi6dqd0o33a14g7ftpsistiri6np9m5k.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDwDmDUktOLhZDQsTx_U8-AjPQItHo_ulw</string>
+	<string>AIzaSyDeKOZKMsTk_1KaCopvJE8D2EjBiLdjrJc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>905849856876</string>
+	<string>987150143210</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.taxiUser</string>
 	<key>PROJECT_ID</key>
-	<string>fooddelivery005</string>
+	<string>medicar-7cc3e</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fooddelivery005.appspot.com</string>
+	<string>medicar-7cc3e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:905849856876:ios:7476ee88e5d6918f7fc949</string>
+	<string>1:987150143210:ios:a4e9e0897a22842a04d193</string>
+	<key>DATABASE_URL</key>
+	<string>https://medicar-7cc3e-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
