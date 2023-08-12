@@ -34,12 +34,12 @@ class MapsRepo {
       Marker(
           markerId: const MarkerId('start'),
           position: start,
-          icon: BitmapDescriptor.fromBytes(markerSouce)),
+          icon: BitmapDescriptor.fromBytes(markerDestination)),
     );
     markers.add(Marker(
       markerId: const MarkerId('end'),
       position: end,
-      icon: BitmapDescriptor.fromBytes(markerDestination),
+      icon: BitmapDescriptor.fromBytes(markerSouce),
     ));
 
     return markers;
