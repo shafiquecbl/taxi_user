@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:taxi_user/controller/localization_controller.dart';
+import 'package:taxi_user/controller/ride_controller.dart';
 import 'package:taxi_user/controller/theme_controller.dart';
 import 'package:taxi_user/data/model/language.dart';
 import 'package:taxi_user/data/repository/language_repo.dart';
@@ -19,6 +20,7 @@ Future<Map<String, Map<String, String>>> init() async {
   // Controller
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
+  Get.lazyPut(() => RideController());
 
   // Retrieving localized data
   Map<String, Map<String, String>> languages = {};

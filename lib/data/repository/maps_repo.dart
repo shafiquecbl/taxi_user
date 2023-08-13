@@ -4,6 +4,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_address_from_latlng/flutter_address_from_latlng.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -174,5 +175,14 @@ class MapsRepo {
       end.longitude,
     );
     return ((distanceInMeters / 1000) * 5).toStringAsFixed(0);
+  }
+
+  // get formatted adddress
+  Future<String> getFormattedAddress(LatLng position) async {
+    return await FlutterAddressFromLatLng().getFormattedAddress(
+      latitude: position.latitude,
+      longitude: position.longitude,
+      googleApiKey: AppConstants.API_KEY,
+    );
   }
 }

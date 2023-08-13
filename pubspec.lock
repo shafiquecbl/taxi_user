@@ -190,6 +190,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_address_from_latlng:
+    dependency: "direct main"
+    description:
+      name: flutter_address_from_latlng
+      sha256: e7e276e3aebd6aa44728095ea2de39b7f9ad1ad4b77f8645227603160c60ed03
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   flutter_blurhash:
     dependency: transitive
     description:

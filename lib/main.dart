@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taxi_user/controller/theme_controller.dart';
 import 'package:taxi_user/utils/app_constants.dart';
-import 'package:taxi_user/view/screens/intro/intro.dart';
+import 'package:taxi_user/view/screens/home/home.dart';
 import 'helper/get_di.dart' as di;
 import 'controller/localization_controller.dart';
 import 'helper/navigation.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
           translations: Messages(languages: languages),
           fallbackLocale: Locale(AppConstants.languages[0].languageCode,
               AppConstants.languages[0].countryCode),
-          home: const IntroScreen(),
+          home: const HomeScreen(),
         );
       });
     }));
