@@ -2,7 +2,9 @@
 
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/common/snackbar.dart';
 import 'package:taxi_user/data/repository/maps_repo.dart';
+import 'package:taxi_user/theme/maps.dart';
 
 class RideController extends GetxController implements GetxService {
   static RideController get to => Get.find();
@@ -24,6 +26,9 @@ class RideController extends GetxController implements GetxService {
   LatLng _startPoint = const LatLng(37.7749, -122.4194);
   LatLng _endPoint = const LatLng(34.0522, -118.2437);
 
+  List<String> _drivers = [];
+  bool _inRide = false;
+
   double? get distance => _distance;
   double? get fare => _fare;
   String? get duration => _duration;
@@ -40,6 +45,9 @@ class RideController extends GetxController implements GetxService {
   String get dropAddress => _dropAddress;
   LatLng get startPoint => _startPoint;
   LatLng get endPoint => _endPoint;
+
+  List<String> get drivers => _drivers;
+  bool get inRide => _inRide;
 
   set mapController(GoogleMapController value) {
     _mapController = value;
@@ -111,10 +119,21 @@ class RideController extends GetxController implements GetxService {
     update();
   }
 
+  set drivers(List<String> value) {
+    _drivers = value;
+    update();
+  }
+
+  set inRide(bool value) {
+    _inRide = value;
+    update();
+  }
+
   void getCurrentLocation() {
+    showLoading();
     MapsRepo.instance.getCurrentLocation((position) async {
       _currentPosition = LatLng(position.latitude, position.longitude);
-
+      setMapTheme();
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
@@ -123,14 +142,15 @@ class RideController extends GetxController implements GetxService {
           ),
         ),
       );
-
       _startPoint = _currentPosition!;
       _pickupAddress = await MapsRepo.instance.getFormattedAddress(_startPoint);
       update();
+      dismiss();
     });
   }
 
   void getPolyline() async {
+    showLoading();
     _polylines.clear();
     _polylines = await MapsRepo.instance.getPolyline(startPoint, endPoint);
     if (_polylines.isNotEmpty) {
@@ -147,12 +167,15 @@ class RideController extends GetxController implements GetxService {
     _sheetVisible = true;
     update();
     Future.delayed(const Duration(milliseconds: 500), () {
+      dismiss();
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
             MapsRepo.instance.getCameraPosition(start, end)),
       );
     });
   }
+
+  setMapTheme() => mapController.setMapStyle(MAPS_THEME);
 
   reset() {
     _markers.clear();

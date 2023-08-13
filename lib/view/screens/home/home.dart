@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:taxi_user/controller/ride_controller.dart';
 import 'package:taxi_user/view/screens/drawer/drawer.dart';
+import 'package:taxi_user/view/screens/home/widgets/ride_sheet.dart';
 import 'widgets/address_widget.dart';
 import 'widgets/bottom_sheet.dart';
 
@@ -27,11 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         key: _scaffoldKey,
         drawer: const DrawerWidget(),
         appBar: AppBar(
-          title: Text(
-            'DropUs',
-            style:
-                Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20),
-          ),
+          title: _getTitle(con, context),
           centerTitle: true,
           leading: IconButton(
             onPressed: () => _scaffoldKey.currentState!.openDrawer(),
@@ -39,8 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Iconsax.notification),
+              onPressed: () {
+                con.inRide = !con.inRide;
+              },
+              icon: Icon(
+                con.inRide ? Icons.info_outline_rounded : Iconsax.notification,
+              ),
             ),
           ],
         ),
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               height: MediaQuery.of(context).size.height /
-                  (con.sheetVisible ? 1.8 : 1),
+                  (con.sheetVisible ? (con.inRide ? 1.67 : 1.8) : 1),
               child: GoogleMap(
                 mapType: MapType.normal,
                 compassEnabled: true,
@@ -77,10 +78,36 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        bottomSheet: con.sheetVisible ? const BookRideSheet() : null,
+        bottomSheet: con.sheetVisible
+            ? con.inRide
+                ? const RideSheet()
+                : const BookRideSheet()
+            : null,
       );
     });
   }
+
+  Widget _getTitle(RideController con, BuildContext context) => con.inRide
+      ? Column(
+          children: [
+            Text(
+              'Driver is arriving',
+              style:
+                  Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 16),
+            ),
+            Text(
+              'ID: 123456789',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12,
+                  ),
+            ),
+          ],
+        )
+      : Text(
+          'DropUs',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20),
+        );
 
   Align _currentLocationWidget(RideController con) => Align(
         alignment: Alignment.centerRight,

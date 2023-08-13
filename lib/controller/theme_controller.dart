@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taxi_user/controller/ride_controller.dart';
 import 'package:taxi_user/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ class ThemeController extends GetxController implements GetxService {
 
   void toggleTheme() {
     _darkTheme = !_darkTheme;
+    RideController.to.setMapTheme();
     sharedPreferences.setBool(AppConstants.THEME, _darkTheme);
     update();
   }
@@ -37,4 +39,4 @@ class ThemeController extends GetxController implements GetxService {
   static ThemeController get to => Get.find();
 }
 
-bool get isDark => Get.isDarkMode;
+bool get isDark => ThemeController.to.darkTheme;

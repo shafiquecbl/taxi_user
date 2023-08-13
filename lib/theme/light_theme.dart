@@ -11,7 +11,7 @@ ThemeData light({Color color = const Color(0xFF57B054)}) => ThemeData(
       scaffoldBackgroundColor: const Color(0xFFFFFFFF),
       brightness: Brightness.light,
       hintColor: const Color(0xFF9F9F9F),
-      cardColor: const Color(0xFFF7F8FB), // 0xFFF6F6F6
+      cardColor: const Color(0xFFF7F8FA), // 0xFFF6F6F6
       dividerColor: Colors.grey[300]!, //0xFFE8E8E8
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(foregroundColor: color)),

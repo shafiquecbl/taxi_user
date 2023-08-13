@@ -234,7 +234,18 @@ class _BookRideSheetState extends State<BookRideSheet> {
             const SizedBox(height: 30),
             CustomButton(
               text: 'Book Ride',
-              onPressed: () => launchScreen(const SearchingDriverScreen()),
+              onPressed: () {
+                Future.delayed(const Duration(seconds: 5), () {
+                  con.drivers = [
+                    'Driver 1',
+                    'Driver 2',
+                    'Driver 3',
+                    'Driver 4',
+                    'Driver 5'
+                  ];
+                });
+                launchScreen(const SearchingDriverScreen());
+              },
             ),
           ],
         ),

@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:taxi_user/controller/theme_controller.dart';
 import 'package:taxi_user/utils/app_constants.dart';
+import 'package:taxi_user/utils/colors.dart';
+import 'package:taxi_user/view/base/ripple/ripple.dart';
 import 'package:taxi_user/view/screens/home/home.dart';
 import 'helper/get_di.dart' as di;
 import 'controller/localization_controller.dart';
@@ -42,8 +45,18 @@ class MyApp extends StatelessWidget {
                   : light(color: themeController.lightColor!),
           locale: localizeController.locale,
           translations: Messages(languages: languages),
-          fallbackLocale: Locale(AppConstants.languages[0].languageCode,
-              AppConstants.languages[0].countryCode),
+          fallbackLocale: Locale(
+            AppConstants.languages[0].languageCode,
+            AppConstants.languages[0].countryCode,
+          ),
+          navigatorObservers: [FlutterSmartDialog.observer],
+          builder: FlutterSmartDialog.init(loadingBuilder: (string) {
+            return const RipplesAnimation(
+              size: 20,
+              color: primaryColor,
+              child: SizedBox(),
+            );
+          }),
           home: const HomeScreen(),
         );
       });

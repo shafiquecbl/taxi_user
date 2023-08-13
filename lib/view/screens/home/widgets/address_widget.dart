@@ -45,7 +45,6 @@ class _AddressWidgetState extends State<AddressWidget> {
               color: Theme.of(context).primaryColor,
               onPressed: () async {
                 await launchScreen(PlacePicker(
-                  useCurrentLocation: true,
                   apiKey: AppConstants.API_KEY,
                   initialPosition:
                       con.currentPosition ?? const LatLng(31.5204, 74.3587),
@@ -78,7 +77,6 @@ class _AddressWidgetState extends State<AddressWidget> {
               color: Colors.red,
               onPressed: () async {
                 await launchScreen(PlacePicker(
-                  useCurrentLocation: true,
                   apiKey: AppConstants.API_KEY,
                   initialPosition:
                       con.currentPosition ?? const LatLng(31.5204, 74.3587),

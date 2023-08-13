@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/utils/style.dart';
 
-ThemeData dark({Color color = const Color(0xFF55B174)}) => ThemeData(
+ThemeData dark({Color color = const Color(0xFF57B054)}) => ThemeData(
       useMaterial3: true,
       fontFamily: 'poppins',
       primaryColor: color,

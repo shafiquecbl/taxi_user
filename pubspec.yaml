@@ -23,6 +23,7 @@ dependencies:
   auto_size_text: ^3.0.0
   country_picker: ^2.0.19
   url_launcher: any
+  flutter_smart_dialog: ^4.5.5
 
   # Firebase
   firebase_core: ^2.8.0

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_address_from_latlng/flutter_address_from_latlng.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
@@ -81,7 +82,7 @@ class MapsRepo {
 
       polylines.add(Polyline(
         polylineId: const PolylineId("path"),
-        color: Colors.deepPurpleAccent,
+        color: primaryColor,
         width: 5,
         points: polylineCoordinates,
       ));
