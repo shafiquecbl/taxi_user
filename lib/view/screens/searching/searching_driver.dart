@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:taxi_user/common/buttons.dart';
 import 'package:taxi_user/controller/ride_controller.dart';
-import 'package:taxi_user/view/base/ripple/ripple.dart';
-
+import 'package:taxi_user/helper/navigation.dart';
+import 'package:taxi_user/view/screens/searching/widgets/searching_widget.dart';
 import 'widgets/searching_sheet.dart';
 
 class SearchingDriverScreen extends StatelessWidget {
@@ -19,7 +17,7 @@ class SearchingDriverScreen extends StatelessWidget {
       return Scaffold(
         body: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          height: MediaQuery.of(context).size.height / 1.48,
+          height: MediaQuery.of(context).size.height / 1.3,
           child: Stack(
             children: [
               GoogleMap(
@@ -54,31 +52,19 @@ class SearchingDriverScreen extends StatelessWidget {
                     end: Alignment.bottomCenter,
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20),
-                    Center(
-                        child: RipplesAnimation(
-                      color: Theme.of(context).primaryColor,
-                      child: const Icon(
-                        Iconsax.location,
-                        color: Colors.white,
-                      ),
-                    )),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Searching for a driver',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
+                child: const SearchingWidget(),
               ),
               Positioned(
-                  top: MediaQuery.of(context).padding.top + 10,
-                  left: 0,
-                  child: const CustomBackButton())
+                  top: MediaQuery.of(context).padding.top,
+                  right: 10,
+                  child: TextButton(
+                      onPressed: pop,
+                      child: Text(
+                        'Cancel',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.red,
+                            ),
+                      )))
             ],
           ),
         ),

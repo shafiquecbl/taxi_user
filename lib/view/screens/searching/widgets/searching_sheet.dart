@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:taxi_user/common/primary_button.dart';
 import 'package:taxi_user/controller/ride_controller.dart';
 import 'package:taxi_user/utils/style.dart';
 
@@ -19,6 +18,13 @@ class SearchingDriverSheet extends StatelessWidget {
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -66,11 +72,6 @@ class SearchingDriverSheet extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20.0),
-            CustomButton(
-              text: 'Cancel Booking',
-              onPressed: () {},
-            )
           ],
         ),
       );
