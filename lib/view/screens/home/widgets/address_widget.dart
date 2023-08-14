@@ -21,7 +21,7 @@ class AddressWidget extends StatefulWidget {
 class _AddressWidgetState extends State<AddressWidget> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RideController>(builder: (con) {
+    return GetBuilder<RideController>(builder: (rideController) {
       return Container(
         margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
         padding: pagePadding,
@@ -39,32 +39,37 @@ class _AddressWidgetState extends State<AddressWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildAddressRow(
-              title: con.pickupAddress.isEmpty
+              rideController,
+              title: rideController.pickupAddress.isEmpty
                   ? 'Pickup Address'
-                  : con.pickupAddress,
+                  : rideController.pickupAddress,
               color: Theme.of(context).primaryColor,
-              onPressed: () async {
-                await launchScreen(PlacePicker(
-                  apiKey: AppConstants.API_KEY,
-                  initialPosition:
-                      con.currentPosition ?? const LatLng(31.5204, 74.3587),
-                  onPlacePicked: (result) {
-                    pop();
-                    con.pickupAddress = result.formattedAddress!;
+              onPressed: rideController.inRide
+                  ? null
+                  : () async {
+                      await launchScreen(PlacePicker(
+                        apiKey: AppConstants.API_KEY,
+                        initialPosition: rideController.currentPosition ??
+                            const LatLng(31.5204, 74.3587),
+                        onPlacePicked: (result) {
+                          pop();
+                          rideController.pickupAddress =
+                              result.formattedAddress!;
 
-                    con.startPoint = LatLng(result.geometry!.location.lat,
-                        result.geometry!.location.lng);
+                          rideController.startPoint = LatLng(
+                              result.geometry!.location.lat,
+                              result.geometry!.location.lng);
 
-                    if (con.pickupAddress.isNotEmpty &&
-                        con.dropAddress.isNotEmpty) {
-                      con.getPolyline();
-                    }
-                  },
-                ));
-              },
+                          if (rideController.pickupAddress.isNotEmpty &&
+                              rideController.dropAddress.isNotEmpty) {
+                            rideController.getPolyline();
+                          }
+                        },
+                      ));
+                    },
               onClose: () {
-                con.reset();
-                con.pickupAddress = '';
+                rideController.reset();
+                rideController.pickupAddress = '';
               },
             ),
             for (var i = 0; i < 5; i++)
@@ -72,31 +77,36 @@ class _AddressWidgetState extends State<AddressWidget> {
                 padding: 7,
               ),
             _buildAddressRow(
-              title:
-                  con.dropAddress.isEmpty ? 'Dropoff Address' : con.dropAddress,
+              rideController,
+              title: rideController.dropAddress.isEmpty
+                  ? 'Dropoff Address'
+                  : rideController.dropAddress,
               color: Colors.red,
-              onPressed: () async {
-                await launchScreen(PlacePicker(
-                  apiKey: AppConstants.API_KEY,
-                  initialPosition:
-                      con.currentPosition ?? const LatLng(31.5204, 74.3587),
-                  onPlacePicked: (result) {
-                    pop();
-                    con.dropAddress = result.formattedAddress!;
+              onPressed: rideController.inRide
+                  ? null
+                  : () async {
+                      await launchScreen(PlacePicker(
+                        apiKey: AppConstants.API_KEY,
+                        initialPosition: rideController.currentPosition ??
+                            const LatLng(31.5204, 74.3587),
+                        onPlacePicked: (result) {
+                          pop();
+                          rideController.dropAddress = result.formattedAddress!;
 
-                    con.endPoint = LatLng(result.geometry!.location.lat,
-                        result.geometry!.location.lng);
+                          rideController.endPoint = LatLng(
+                              result.geometry!.location.lat,
+                              result.geometry!.location.lng);
 
-                    if (con.pickupAddress.isNotEmpty &&
-                        con.dropAddress.isNotEmpty) {
-                      con.getPolyline();
-                    }
-                  },
-                ));
-              },
+                          if (rideController.pickupAddress.isNotEmpty &&
+                              rideController.dropAddress.isNotEmpty) {
+                            rideController.getPolyline();
+                          }
+                        },
+                      ));
+                    },
               onClose: () {
-                con.reset();
-                con.dropAddress = '';
+                rideController.reset();
+                rideController.dropAddress = '';
               },
             )
           ],
@@ -105,9 +115,10 @@ class _AddressWidgetState extends State<AddressWidget> {
     });
   }
 
-  Widget _buildAddressRow({
+  Widget _buildAddressRow(
+    RideController rideController, {
     required String title,
-    required Function() onPressed,
+    required Function()? onPressed,
     required Function() onClose,
     required Color color,
   }) {
@@ -132,14 +143,15 @@ class _AddressWidgetState extends State<AddressWidget> {
                 )),
           ),
         ),
-        InkWell(
-          onTap: onClose,
-          child: Icon(
-            Icons.close,
-            size: 20,
-            color: Theme.of(context).hintColor,
+        if (!rideController.inRide)
+          InkWell(
+            onTap: onClose,
+            child: Icon(
+              Icons.close,
+              size: 20,
+              color: Theme.of(context).hintColor,
+            ),
           ),
-        ),
       ],
     );
   }

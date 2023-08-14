@@ -153,6 +153,7 @@ class RideController extends GetxController implements GetxService {
     showLoading();
     _polylines.clear();
     _polylines = await MapsRepo.instance.getPolyline(startPoint, endPoint);
+
     if (_polylines.isNotEmpty) {
       addMarkers(startPoint, endPoint);
     }
@@ -173,6 +174,16 @@ class RideController extends GetxController implements GetxService {
             MapsRepo.instance.getCameraPosition(start, end)),
       );
     });
+  }
+
+  addDriver(String value) {
+    _drivers.add(value);
+    update();
+  }
+
+  removeDriver(int index) {
+    _drivers.removeAt(index);
+    update();
   }
 
   setMapTheme() => mapController.setMapStyle(MAPS_THEME);

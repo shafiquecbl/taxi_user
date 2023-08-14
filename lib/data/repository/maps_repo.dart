@@ -12,6 +12,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:taxi_user/common/icons.dart';
 import 'package:taxi_user/common/primary_button.dart';
+import 'package:taxi_user/controller/ride_controller.dart';
 import 'package:taxi_user/helper/navigation.dart';
 import 'package:taxi_user/utils/app_constants.dart';
 import 'package:taxi_user/utils/colors.dart';
@@ -28,15 +29,16 @@ class MapsRepo {
 
   Future<Set<Marker>> getMarkers(LatLng start, LatLng end) async {
     final markerSouce =
-        await convertAssetToUnit8List(Images.pin_start, width: 150);
+        await convertAssetToUnit8List(Images.pin_start, width: 80);
     final markerDestination =
-        await convertAssetToUnit8List(Images.pin_end, width: 150);
+        await convertAssetToUnit8List(Images.pin_end, width: 80);
     Set<Marker> markers = <Marker>{};
     markers.add(
       Marker(
-          markerId: const MarkerId('start'),
-          position: start,
-          icon: BitmapDescriptor.fromBytes(markerDestination)),
+        markerId: const MarkerId('start'),
+        position: start,
+        icon: BitmapDescriptor.fromBytes(markerDestination),
+      ),
     );
     markers.add(Marker(
       markerId: const MarkerId('end'),
