@@ -15,4 +15,5 @@ class Images {
   static const String car3 = 'assets/images/car3.png';
   static const String pin_start = 'assets/images/Pin_source.png';
   static const String pin_end = 'assets/images/Pin_destination.png';
+  static const String success = 'assets/images/success.png';
 }

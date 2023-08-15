@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               onPressed: () {
                 con.inRide = !con.inRide;
+                // rideEndedDialog(context);
               },
               icon: Icon(
                 con.inRide ? Icons.info_outline_rounded : Iconsax.notification,

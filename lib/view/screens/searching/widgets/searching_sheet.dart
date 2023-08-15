@@ -38,44 +38,58 @@ class SearchingDriverSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20.0),
-            Container(
-              padding: pagePadding,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).dividerColor,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildAddressRow(
-                    context,
-                    title: con.pickupAddress.isEmpty
-                        ? 'Pickup Address'
-                        : con.pickupAddress,
-                    color: Theme.of(context).primaryColor,
-                    time: '11:24',
-                  ),
-                  const SizedBox(height: 10.0),
-                  const SizedBox(height: 10.0),
-                  _buildAddressRow(
-                    context,
-                    title: con.dropAddress.isEmpty
-                        ? 'Dropoff Address'
-                        : con.dropAddress,
-                    color: Colors.red,
-                    time: '',
-                  )
-                ],
-              ),
+            AddressPlaceholder(
+              pickupAddress: con.pickupAddress,
+              dropAddress: con.dropAddress,
             ),
           ],
         ),
       );
     });
+  }
+}
+
+class AddressPlaceholder extends StatelessWidget {
+  final String pickupAddress, dropAddress;
+  final String? time;
+  const AddressPlaceholder(
+      {required this.dropAddress,
+      required this.pickupAddress,
+      this.time,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: pagePadding,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Theme.of(context).dividerColor,
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildAddressRow(
+            context,
+            title: pickupAddress.isEmpty ? 'Pickup Address' : pickupAddress,
+            color: Theme.of(context).primaryColor,
+            time: time ?? '11:24',
+          ),
+          const SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
+          _buildAddressRow(
+            context,
+            title: dropAddress.isEmpty ? 'Dropoff Address' : dropAddress,
+            color: Colors.red,
+            time: time ?? '',
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildAddressRow(
@@ -103,6 +117,8 @@ class SearchingDriverSheet extends StatelessWidget {
         const SizedBox(width: 10.0),
         Expanded(
           child: Text(title,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 13.0,
                 fontWeight: FontWeight.normal,
