@@ -7,7 +7,7 @@ import 'package:taxi_user/data/repository/maps_repo.dart';
 import 'package:taxi_user/theme/maps.dart';
 
 class RideController extends GetxController implements GetxService {
-  static RideController get to => Get.find();
+  static RideController get to => Get.find<RideController>();
 
   late GoogleMapController _mapController;
   Set<Marker> _markers = <Marker>{};

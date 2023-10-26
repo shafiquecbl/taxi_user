@@ -4,7 +4,7 @@ import 'package:taxi_user/data/model/language.dart';
 import 'images.dart';
 
 class AppConstants {
-  static const String API_KEY = 'AIzaSyDdJ8uMExIeu4qnV325riYEz1RArZqLz0s';
+  static const String API_KEY = 'YOUR_API_KEY';
   static const String APP_NAME = 'Food Delivery';
 
   // Shared Key
